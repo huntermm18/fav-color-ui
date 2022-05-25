@@ -52,6 +52,7 @@ This template includes the initial setup and scaffolding you need to create a fr
         // custom_domain = "custom-domain.byu.edu" // OPTIONAL. Only required if you want a custom domain name.
         // app_dynamics_key = "<APP_DYNAMICS_KEY>" // OPTIONAL. See the "AppDynamics Setup" for instructions how to get the key.
         ```
+       
     2) Update the TODO items in `/terraform/dev/setup/setup-dev.tf` and `/terraform/dev/setup/setup-prd.tf`
     3) Run terraform to setup the DEV environment
         1) Run `awslogin` and login to the dev account you want to deploy to.
