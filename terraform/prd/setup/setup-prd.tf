@@ -7,7 +7,7 @@ terraform {
     encrypt        = true
     bucket         = "terraform-state-storage-863362256468" // TODO replace <PRD_AWS_ACCT_NUM>
     dynamodb_table = "terraform-state-lock-863362256468"    // TODO replace <PRD_AWS_ACCT_NUM>
-    key            = "mhm62-fav-color-ui/prd/setup.tfstate"               // TODO replace <APP_NAME>
+    key            = "mhm62-fav-color-ui/prd/setup.tfstate" // TODO replace <APP_NAME>
     region         = "us-west-2"
   }
   required_providers {
@@ -53,7 +53,7 @@ module "setup" {
   tags = {
     env              = "prd"
     team             = "OIT-BYU-APPS-CUSTOM"
-    data-sensitivity = "confidential"                         // TODO update data-sensitivity (if needed)
+    data-sensitivity = "confidential"                                  // TODO update data-sensitivity (if needed)
     repo             = "https://github.com/byu-oit/mhm62-fav-color-ui" // TODO Update REPO_NAME
     app              = local.app_name
   }
