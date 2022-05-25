@@ -40,7 +40,7 @@ variable "app_dynamics_key" {
 }
 
 locals {
-  app_name = "mhm62-fav-color-ui-dev" // TODO replace <APP_NAME>
+  app_name = "mhm62-fav-color-ui" // TODO replace <APP_NAME>
 }
 
 module "setup" {

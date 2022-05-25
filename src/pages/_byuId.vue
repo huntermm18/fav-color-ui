@@ -39,7 +39,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class MePage extends Vue {
-  name: string = 'Hunter'
-  favColor: string = 'blue'
+  name: string = 'Bob Student'
+  favColor: string = 'green'
 }
 </script>
