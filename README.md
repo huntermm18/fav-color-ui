@@ -7,6 +7,7 @@
 
 # Frontend Nuxt Project Template
 
+
 > For the BYU Apps Custom Code team.
 
 ## What this contains
