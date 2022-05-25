@@ -5,6 +5,7 @@
         <vue-logo />
         <vuetify-logo />
       </div>
+      <me/>
       <v-card>
         <v-card-title class="text-h5">
           Welcome to the Vuetify + Nuxt.js template
@@ -52,11 +53,13 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import VueLogo from '~/components/VueLogo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import me from '~/components/me.vue'
 
 @Component({
   components: {
     VueLogo,
-    VuetifyLogo
+    VuetifyLogo,
+    me
   }
 })
 export default class IndexPage extends Vue {

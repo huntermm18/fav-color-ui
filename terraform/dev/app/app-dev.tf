@@ -36,7 +36,8 @@ module "acs" {
 }
 
 data "aws_route53_zone" "hosted_zone" {
-  name = local.url
+  // name = local.url
+  name = 'ns-91.awsdns-11.com'
 }
 
 module "s3_site" {
