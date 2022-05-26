@@ -19,7 +19,7 @@
         tile
         size="80"
         :color="favColor"
-      ></v-list-item-avatar>
+      />
     </v-list-item>
 
     <v-card-actions>
@@ -34,7 +34,6 @@
   </v-card>
 </template>
 
-
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 
@@ -42,10 +41,8 @@ import { Component, Vue } from 'nuxt-property-decorator'
   name: 'from component'
 })
 
-
 @Component
 export default class FavoriteColorCard extends Vue {
   name?: 'from component'
-
 }
 </script>
