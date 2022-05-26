@@ -5,7 +5,7 @@
         <vue-logo />
         <vuetify-logo />
       </div>
-      <me/>
+      <FavoriteColorCard/>
       <v-card>
         <v-card-title class="text-h5">
           Welcome to the Vuetify + Nuxt.js template
@@ -53,10 +53,12 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import VueLogo from '~/components/VueLogo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
-import me from '~/components/me.vue'
+import me from '~/components/FavoriteColorCard.vue'
+import FavoriteColorCard from "~/components/FavoriteColorCard.vue";
 
 @Component({
   components: {
+    FavoriteColorCard,
     VueLogo,
     VuetifyLogo,
     me
