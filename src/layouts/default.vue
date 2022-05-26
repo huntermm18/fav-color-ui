@@ -2,8 +2,7 @@
   <v-app>
     <byu-header>
       <span slot="site-title">
-        Frontend Template
-        <!-- TODO change site title -->
+        Favorite Colors
         <span v-if="isSandbox" class="sandbox-notification">DEV</span>
       </span>
       <byu-user-info v-if="authenticated" slot="user">

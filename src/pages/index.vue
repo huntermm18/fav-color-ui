@@ -1,52 +1,73 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <vue-logo />
-        <vuetify-logo />
-      </div>
-      <FavoriteColorCard />
-      <v-card>
-        <v-card-title class="text-h5">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower
-            developers to create amazing applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a href="https://vuetifyjs.com" target="_blank">documentation</a>.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">discord</a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a href="https://github.com/vuetifyjs/vuetify/issues" target="_blank" title="contribute">issue board</a>.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.
-          </p>
-          <div class="text-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a href="https://nuxtjs.org/" target="_blank">Nuxt Documentation</a>
-          <br>
-          <a href="https://github.com/nuxt/nuxt.js" target="_blank">Nuxt GitHub</a>
-        </v-card-text>
+  <div :key="numAdded" >
+
+    <!-- V-DIALOG -->
+    <v-dialog
+      v-model="dialog"
+      width="1000"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn class="edit-button"
+               color="blue lighten-2"
+               dark
+               v-bind="attrs"
+               v-on="on"
+               width="200"
+        > Add New </v-btn>
+      </template>
+
+      <v-card class="card">
+        <v-card-title class="text-h5 grey lighten-2">
+          Add a New Favorite Color Card
+        </v-card-title><br/>
+
+        <v-card-text>Enter your name</v-card-text>
+        <v-text-field v-model="newPersonName" label="Name" outlined />
+
+        <v-card-text>Enter your BYU-ID</v-card-text>
+        <v-text-field v-model="newByuId" label="BYU-ID" outlined />
+
+        <v-card-text>Select a color</v-card-text>
+        <v-select
+          v-model="newFavColor"
+          :items="colors"
+          label="Colors"
+          outlined
+        ></v-select>
+
+        <v-divider></v-divider>
+
         <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" text nuxt to="/inspire">
-            Continue
-          </v-btn>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="primary"
+            text
+            @click="dialog = false"
+          >Cancel</v-btn>
+          <v-btn
+            color="primary"
+            text
+            @click="addColorCard(); dialog = false"
+          >Save</v-btn>
+
         </v-card-actions>
       </v-card>
-    </v-col>
-  </v-row>
+    </v-dialog>
+    <!-- End V-DIALOG -->
+
+    <ul v-for="(student, index) in students" >
+      <v-row no-gutters v-if="index == 0 || index % 2 == 0">
+        <v-col >
+          <favorite-color-card :name="student.name" :net-id="student.byuId" :fav-color="student.favColor" />
+        </v-col>
+        <v-col v-if="students[index+1]" >
+          <favorite-color-card :name="students[index+1].name" :net-id="students[index+1].byuId" :fav-color="students[index+1].favColor" />
+        </v-col>
+      </v-row>
+    </ul>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -55,6 +76,8 @@ import VueLogo from '~/components/VueLogo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import me from '~/components/FavoriteColorCard.vue'
 import FavoriteColorCard from '~/components/FavoriteColorCard.vue'
+import { fakeStudents } from '~/components/FakeStudents'
+import { colors } from '~/components/colors'
 
 @Component({
   components: {
@@ -65,10 +88,34 @@ import FavoriteColorCard from '~/components/FavoriteColorCard.vue'
   }
 })
 export default class IndexPage extends Vue {
-  head (this: IndexPage): object {
-    return {
-      title: 'Home'
+  students = fakeStudents
+  colors = colors
+  dialog = false
+  numAdded = 0
+
+  newByuId: string = ''
+  newFavColor: string = ''
+  newPersonName: string = ''
+
+  addColorCard() {
+    let newStudent = {
+      byuId: this.newByuId,
+      name: this.newPersonName,
+      favColor: this.newFavColor
     }
+    console.log('in addColorCard()')
+    if (!newStudent.byuId || !newStudent.name || !newStudent.favColor) {
+      return
+    }
+    this.students.push(newStudent)
+    this.numAdded++ // key to refresh the DOM
   }
+
 }
 </script>
+
+<style>
+.card {
+  padding: 15pt;
+}
+</style>

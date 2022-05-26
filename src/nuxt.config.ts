@@ -56,9 +56,21 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://api.byu.edu/MAIN_API_BASE', // TODO: If most of your API endpoints start from a common base, then set it here
-    https: true
+    baseURL: '', // TODO: If most of your API endpoints start from a common base, then set it here
+    https: true,
+    proxy: true
   },
+//Stops local CORS errors when target is set
+    proxy: {
+      '/api': {
+        target: 'https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/',
+        pathRewrite: {'^/api': '/'},
+        changeOrigin: true,
+          // headers: {
+          //     'X-Jwt-Assertion': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlkySTVNemd4WWpZNVlUUXdNVGxqWkRVek4yWTJaamxqTURVNFpXWmpaVE14WmpWbU9USmxNZyJ9.eyJpc3MiOiJodHRwczovL2FwaS5ieXUuZWR1IiwiZXhwIjoxNjUzNjAxODUxLCJodHRwOi8vd3NvMi5vcmcvY2xhaW1zL3N1YnNjcmliZXIiOiJCWVUvbWhtNjIiLCJodHRwOi8vd3NvMi5vcmcvY2xhaW1zL2FwcGxpY2F0aW9uaWQiOiIxMjM5NiIsImh0dHA6Ly93c28yLm9yZy9jbGFpbXMvYXBwbGljYXRpb25uYW1lIjoiRGVmYXVsdEFwcGxpY2F0aW9uIiwiaHR0cDovL3dzbzIub3JnL2NsYWltcy9hcHBsaWNhdGlvbnRpZXIiOiJVbmxpbWl0ZWQiLCJodHRwOi8vd3NvMi5vcmcvY2xhaW1zL2FwaWNvbnRleHQiOiIvZWNoby92MiIsImh0dHA6Ly93c28yLm9yZy9jbGFpbXMvdmVyc2lvbiI6InYyIiwiaHR0cDovL3dzbzIub3JnL2NsYWltcy90aWVyIjoiVW5saW1pdGVkIiwiaHR0cDovL3dzbzIub3JnL2NsYWltcy9rZXl0eXBlIjoiU0FOREJPWCIsImh0dHA6Ly93c28yLm9yZy9jbGFpbXMvdXNlcnR5cGUiOiJBUFBMSUNBVElPTiIsImh0dHA6Ly93c28yLm9yZy9jbGFpbXMvZW5kdXNlciI6Im1obTYyQGNhcmJvbi5zdXBlciIsImh0dHA6Ly93c28yLm9yZy9jbGFpbXMvZW5kdXNlclRlbmFudElkIjoiLTEyMzQiLCJodHRwOi8vd3NvMi5vcmcvY2xhaW1zL2NsaWVudF9pZCI6InEyRHdKUmRFWmZDRFpteUFrUWZSZ1JySE9VRWEiLCJodHRwOi8vYnl1LmVkdS9jbGFpbXMvY2xpZW50X3Jlc3Rfb2ZfbmFtZSI6Ik1pY2hhZWwgSHVudGVyIiwiaHR0cDovL2J5dS5lZHUvY2xhaW1zL2NsaWVudF9wZXJzb25faWQiOiI1NDAyMjU4MzIiLCJodHRwOi8vYnl1LmVkdS9jbGFpbXMvY2xpZW50X3NvcnRfbmFtZSI6Ik1hZHNlbiwgTWljaGFlbCBIdW50ZXIiLCJodHRwOi8vYnl1LmVkdS9jbGFpbXMvY2xpZW50X2NsYWltX3NvdXJjZSI6IkNMSUVOVF9TVUJTQ1JJQkVSIiwiaHR0cDovL2J5dS5lZHUvY2xhaW1zL2NsaWVudF9uZXRfaWQiOiJtaG02MiIsImh0dHA6Ly9ieXUuZWR1L2NsYWltcy9jbGllbnRfc3Vic2NyaWJlcl9uZXRfaWQiOiJtaG02MiIsImh0dHA6Ly9ieXUuZWR1L2NsYWltcy9jbGllbnRfbmFtZV9zdWZmaXgiOiIgIiwiaHR0cDovL2J5dS5lZHUvY2xhaW1zL2NsaWVudF9zdXJuYW1lIjoiTWFkc2VuIiwiaHR0cDovL2J5dS5lZHUvY2xhaW1zL2NsaWVudF9zdXJuYW1lX3Bvc2l0aW9uIjoiTCIsImh0dHA6Ly9ieXUuZWR1L2NsYWltcy9jbGllbnRfbmFtZV9wcmVmaXgiOiIgIiwiaHR0cDovL2J5dS5lZHUvY2xhaW1zL2NsaWVudF9ieXVfaWQiOiIwODM4MTQ5MjMiLCJodHRwOi8vYnl1LmVkdS9jbGFpbXMvY2xpZW50X3ByZWZlcnJlZF9maXJzdF9uYW1lIjoiSHVudGVyIn0.iClenw4451NWs36Vc6rReh4LlrreugZwfKEcme2GpJy9k4NL1zYAsq4aLlQOLS1ot8dmX-aP5nH2zTCubKN9Q-Q2Mm6Bge_zcGQgGjP71M1_97Fh7hM6MTSh4KDA-Wl8jBzmQyqn7o87utgLEtIk_FIQpH1u6cV95I9fAn3JqLz11mq0DXTWxOKzRs83Q_hAB5paPGGzcY5pINeFp3qvjY7nVSXrQGNlAuJ7ApuntSOgNqakSJm4nlo5_prnOgjlBsYsZNK_soK24iP7dVu7AGh8vDMAvbivqKvV_3-1l4k4L3rc9chEhyH_DXXEJxCg4eS6mHjdZUW8R2J0G6ZL-A'
+          // }
+      }
+    },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
