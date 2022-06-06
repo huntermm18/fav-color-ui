@@ -1,4 +1,4 @@
-fakeStudents = [
+const fakeStudents = [
   {
     byuId: '1234',
     name: 'cosmo',

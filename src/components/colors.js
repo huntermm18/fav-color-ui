@@ -1,4 +1,4 @@
-colors = [
+const colors = [
   'blue',
   'red',
   'green',
