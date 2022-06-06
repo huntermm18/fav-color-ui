@@ -24,5 +24,8 @@
     "nuxt-property-decorator": "*",
     "vuex": "*",
     "vuex-mock-store": "*"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
