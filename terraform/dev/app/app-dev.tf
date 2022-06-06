@@ -20,7 +20,7 @@ terraform {
 }
 
 locals {
-  app_name = "mhm62-fav-color-dev"       // TODO replace <APP_NAME>
+  app_name = "mhm62-fav-color-ui"        // TODO replace <APP_NAME>
   url      = "${local.app_name}.byu.edu" // TODO double check if <APP_NAME>.byu.edu is what you want for your public URL
   //url = "ns-91.awsdns-11.com"
   default_tags = {
