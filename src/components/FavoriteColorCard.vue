@@ -96,49 +96,17 @@ export default class FavoriteColorCard extends Vue {
   }
 
   async changeColor () {
-    this.$emit('colorChanged', this.color)
-    // run echo v2 api to get jwt
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
-    // call backend api for this website
-    await this.$axios.$put(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/${this.byuId}`
+    await this.$axios.$put(`https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/${this.byuId}`
       , {
         byu_id: this.byuId,
         fav_color: this.color,
         users_name: this.name
-      }
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
       })
     console.log(`Favorite color changed for ${this.name}`)
   }
 
   async deleteColor () {
-    // run echo v2 api to get jwt
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
-    // call backend api for this website
-    await this.$axios.$delete(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/${this.byuId}`
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
-      })
-
+    await this.$axios.$delete(`https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/${this.byuId}`)
     console.log(`Favorite color deleted for ${this.name}`)
     this.$router.go(0)
   }

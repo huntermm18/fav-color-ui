@@ -19,22 +19,8 @@ export default class byu_id extends Vue {
   async mounted () {
     this.byuId = this.$route.params.byuId
 
-    // run echo v2 api to get jwt
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
     // call backend api for this website
-    const response = await this.$axios.$get(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/${this.byuId}`
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
-      })
+    const response = await this.$axios.$get(`https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/${this.byuId}`)
 
     // set favColor
     console.log(response)

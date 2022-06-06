@@ -56,7 +56,6 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import FavoriteColorCard from '~/components/FavoriteColorCard.vue'
-// import { getJWT } from '~/components/GetJWT'
 import { fakeStudents } from '~/components/FakeStudents'
 import { colors } from '~/components/colors'
 
@@ -65,6 +64,7 @@ import { colors } from '~/components/colors'
     FavoriteColorCard
   }
 })
+
 export default class Me extends Vue {
   name: string = ''
   favColor: string = ''
@@ -75,24 +75,9 @@ export default class Me extends Vue {
 
   async mounted () {
     const userByuId = this.$store.state.user.byuId
+    const response = await this.$axios.$get('https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/')
 
-    // run echo v2 api to get jwt
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
-    // call backend api for this website
-    const response = await this.$axios.$get('https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu'
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
-      })
-
+    // see if the list of people contains the currently logged-in user
     const person = response.find((obj) => {
       return obj.byuId === userByuId
     })
@@ -102,29 +87,16 @@ export default class Me extends Vue {
   }
 
   async addFavoriteColor () {
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
-    // call backend api for this website
-    const response = await this.$axios.$post('https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu'
+    const response = await this.$axios.$post('https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/'
       , {
         byu_id: this.$store.state.user.byuId,
         fav_color: this.newFavColor
-      }
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
       })
-    console.log(response)
-    this.students.push.apply(this.students, response)
-    console.log(this.students)
 
+    // add new favorite color to list of students
+    this.students.push.apply(this.students, response)
+
+    // refresh
     this.$router.go(0)
   }
 

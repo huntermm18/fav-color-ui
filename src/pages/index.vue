@@ -1,7 +1,6 @@
 <template>
   <div :key="numAdded">
-    <!-- V-DIALOG -->
-    <v-dialog
+    <!--v-dialog--
       v-model="dialog"
       width="1000"
     >
@@ -58,8 +57,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
-    <!-- End V-DIALOG -->
+    </v-dialog-->
 
     <ul v-for="(student, index) in students" :key="student.byuId">
       <v-row v-if="index == 0 || index % 2 == 0" no-gutters>
@@ -116,23 +114,7 @@ export default class IndexPage extends Vue {
   }
 
   async mounted () {
-    // run echo v2 api to get jwt
-    const responseJwt = await this.$axios.$get('/api'
-      , {
-        headers: {
-          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
-        }
-      })
-    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
-
-    // call backend api for this website
-    const response = await this.$axios.$get('https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu'
-      , {
-        headers: {
-          'X-Jwt-Assertion': jwt
-        }
-      })
-    console.log(response)
+    const response = await this.$axios.$get('https://api.byu.edu:443/domains/fullstack-training/mhm62-fav-color/V1/')
     this.students.push.apply(this.students, response)
     console.log(this.students)
   }
