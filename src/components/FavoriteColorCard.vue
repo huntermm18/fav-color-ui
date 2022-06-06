@@ -31,7 +31,8 @@
       width="500"
     >
       <template #activator="{ on, attrs }">
-        <v-btn v-if="byuId === $store.state.user.byuId"
+        <v-btn
+          v-if="byuId === $store.state.user.byuId"
           class="edit-button"
           color="blue lighten-2"
           dark
@@ -55,7 +56,6 @@
           :items="colors"
           label="Colors"
           outlined
-          @change=""
         />
 
         <v-divider />
@@ -81,8 +81,6 @@ import { colors } from '~/components/colors'
 
 @Component
 export default class FavoriteColorCard extends Vue {
-
-
   @Prop({ required: true })
     name?: string
 
@@ -110,17 +108,18 @@ export default class FavoriteColorCard extends Vue {
 
     // call backend api for this website
     await this.$axios.$put(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/${this.byuId}`
-      ,{"byu_id": this.byuId,
-        "fav_color": this.color,
-        "users_name": this.name}
-      ,{
+      , {
+        byu_id: this.byuId,
+        fav_color: this.color,
+        users_name: this.name
+      }
+      , {
         headers: {
           'X-Jwt-Assertion': jwt
         }
       })
     console.log(`Favorite color changed for ${this.name}`)
   }
-
 
   async deleteColor () {
     // run echo v2 api to get jwt
@@ -134,7 +133,8 @@ export default class FavoriteColorCard extends Vue {
 
     // call backend api for this website
     await this.$axios.$delete(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/${this.byuId}`
-        , {headers: {
+      , {
+        headers: {
           'X-Jwt-Assertion': jwt
         }
       })

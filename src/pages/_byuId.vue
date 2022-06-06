@@ -1,5 +1,5 @@
 <template>
-  <FavoriteColorCard :name="name" :fav-color="favColor" :byuId="byuId" :key="favColor"/>
+  <FavoriteColorCard :key="favColor" :name="name" :fav-color="favColor" :byu-id="byuId" />
 </template>
 
 <script lang="ts">
@@ -43,6 +43,5 @@ export default class byu_id extends Vue {
     this.byuId = response.byuId
     this.name = response.name
   }
-
 }
 </script>

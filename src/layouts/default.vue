@@ -11,7 +11,7 @@
         </a>
         <a href="/me">
           <span class="sandbox-notification">
-           My Color
+            My Color
           </span>
         </a>
 

@@ -1,11 +1,13 @@
 <template :key="favColor">
-
-  <FavoriteColorCard v-if="favColor"
+  <FavoriteColorCard
+    v-if="favColor"
+    :key="favColor"
     :name="$store.state.user.name.givenName"
-    :favColor="favColor"
-    :byuId="$store.state.user.byuId"
-    :key="favColor"/>
-  <v-dialog v-else
+    :fav-color="favColor"
+    :byu-id="$store.state.user.byuId"
+  />
+  <v-dialog
+    v-else
     v-model="dialog"
     width="1000"
   >
@@ -54,7 +56,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import FavoriteColorCard from '~/components/FavoriteColorCard.vue'
- // import { getJWT } from '~/components/GetJWT'
+// import { getJWT } from '~/components/GetJWT'
 import { fakeStudents } from '~/components/FakeStudents'
 import { colors } from '~/components/colors'
 
@@ -64,7 +66,6 @@ import { colors } from '~/components/colors'
   }
 })
 export default class Me extends Vue {
-
   name: string = ''
   favColor: string = ''
   newFavColor: string = ''
@@ -85,15 +86,14 @@ export default class Me extends Vue {
     const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
 
     // call backend api for this website
-    const response = await this.$axios.$get(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu`
-        , {
-          headers: {
-            'X-Jwt-Assertion': jwt
-          }
-        })
+    const response = await this.$axios.$get('https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu'
+      , {
+        headers: {
+          'X-Jwt-Assertion': jwt
+        }
+      })
 
-
-    const person = response.find(obj => {
+    const person = response.find((obj) => {
       return obj.byuId === userByuId
     })
 
@@ -101,8 +101,7 @@ export default class Me extends Vue {
     console.log('fav color: ' + this.favColor)
   }
 
-
-  async addFavoriteColor() {
+  async addFavoriteColor () {
     const responseJwt = await this.$axios.$get('/api'
       , {
         headers: {
@@ -112,10 +111,10 @@ export default class Me extends Vue {
     const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
 
     // call backend api for this website
-    const response = await this.$axios.$post(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu`
+    const response = await this.$axios.$post('https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu'
       , {
-        "byu_id": this.$store.state.user.byuId,
-        "fav_color": this.newFavColor
+        byu_id: this.$store.state.user.byuId,
+        fav_color: this.newFavColor
       }
       , {
         headers: {
@@ -128,7 +127,6 @@ export default class Me extends Vue {
 
     this.$router.go(0)
   }
-
 
   dialog = false
 }
