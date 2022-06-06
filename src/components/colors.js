@@ -16,4 +16,4 @@ const colors = [
   'grey'
 ]
 
-module.exports = {colors}
+module.exports = { colors }

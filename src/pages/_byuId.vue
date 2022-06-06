@@ -1,5 +1,5 @@
 <template>
-  <FavoriteColorCard :name="name" :favColor="favColor" :net-id="netId" />
+  <FavoriteColorCard :name="name" :fav-color="favColor" :net-id="netId" />
 </template>
 
 <script lang="ts">

@@ -1,25 +1,27 @@
 <template>
-  <div :key="numAdded" >
-
+  <div :key="numAdded">
     <!-- V-DIALOG -->
     <v-dialog
       v-model="dialog"
       width="1000"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn class="edit-button"
-               color="blue lighten-2"
-               dark
-               v-bind="attrs"
-               v-on="on"
-               width="200"
-        > Add New </v-btn>
+      <template #activator="{ on, attrs }">
+        <v-btn
+          class="edit-button"
+          color="blue lighten-2"
+          dark
+          v-bind="attrs"
+          width="200"
+          v-on="on"
+        >
+          Add New
+        </v-btn>
       </template>
 
       <v-card class="card">
         <v-card-title class="text-h5 grey lighten-2">
           Add a New Favorite Color Card
-        </v-card-title><br/>
+        </v-card-title><br>
 
         <v-card-text>Enter your name</v-card-text>
         <v-text-field v-model="newPersonName" label="Name" outlined />
@@ -33,41 +35,43 @@
           :items="colors"
           label="Colors"
           outlined
-        ></v-select>
+        />
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
 
           <v-btn
             color="primary"
             text
             @click="dialog = false"
-          >Cancel</v-btn>
+          >
+            Cancel
+          </v-btn>
           <v-btn
             color="primary"
             text
             @click="addColorCard(); dialog = false"
-          >Save</v-btn>
-
+          >
+            Save
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <!-- End V-DIALOG -->
 
-    <ul v-for="(student, index) in students" >
-      <v-row no-gutters v-if="index == 0 || index % 2 == 0">
-        <v-col >
+    <ul v-for="(student, index) in students" :key="student.byuId">
+      <v-row v-if="index == 0 || index % 2 == 0" no-gutters>
+        <v-col>
           <favorite-color-card :name="student.name" :net-id="student.byuId" :fav-color="student.favColor" />
         </v-col>
-        <v-col v-if="students[index+1]" >
+        <v-col v-if="students[index+1]">
           <favorite-color-card :name="students[index+1].name" :net-id="students[index+1].byuId" :fav-color="students[index+1].favColor" />
         </v-col>
       </v-row>
     </ul>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -97,8 +101,8 @@ export default class IndexPage extends Vue {
   newFavColor: string = ''
   newPersonName: string = ''
 
-  addColorCard() {
-    let newStudent = {
+  addColorCard () {
+    const newStudent = {
       byuId: this.newByuId,
       name: this.newPersonName,
       favColor: this.newFavColor
@@ -110,7 +114,6 @@ export default class IndexPage extends Vue {
     this.students.push(newStudent)
     this.numAdded++ // key to refresh the DOM
   }
-
 }
 </script>
 

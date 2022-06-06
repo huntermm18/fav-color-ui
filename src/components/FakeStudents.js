@@ -53,7 +53,7 @@ const fakeStudents = [
     byuId: '333',
     name: 'jack',
     favColor: 'amber'
-  },
+  }
 
 ]
 

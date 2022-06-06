@@ -12,10 +12,10 @@
         <v-list-item-title class="text-h3 mb-1">
           {{ name }}
         </v-list-item-title>
-        <br/>
+        <br>
         <v-list-item-subtitle>Favorite Color: {{ color }}</v-list-item-subtitle>
         <v-list-item-subtitle>Net-ID: {{ netId }}</v-list-item-subtitle>
-        <br/><br/>
+        <br><br>
       </v-list-item-content>
 
       <v-list-item-avatar
@@ -30,8 +30,9 @@
       v-model="dialog"
       width="500"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn class="edit-button"
+      <template #activator="{ on, attrs }">
+        <v-btn
+          class="edit-button"
           color="blue lighten-2"
           dark
           v-bind="attrs"
@@ -44,7 +45,7 @@
       <v-card class="card">
         <v-card-title class="text-h5 grey lighten-2">
           Edit your favorite color
-        </v-card-title><br/>
+        </v-card-title><br>
 
         <v-card-text>
           Select a color
@@ -55,12 +56,12 @@
           label="Colors"
           outlined
           @change="colorChanged()"
-        ></v-select>
+        />
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             color="primary"
             text
@@ -72,7 +73,6 @@
       </v-card>
     </v-dialog>
     <!-- End V-DIALOG -->
-
   </v-card>
 </template>
 
@@ -83,20 +83,20 @@ import { colors } from '~/components/colors'
 @Component
 export default class FavoriteColorCard extends Vue {
   @Prop({ required: true })
-  name?: string
+    name?: string
 
   @Prop({ required: true })
-  netId?: string
+    netId?: string
 
   @Prop({ required: true })
-  favColor?: string
+    favColor?: string
 
   color: string = ''
-  mounted() {
+  mounted () {
     this.color = this.favColor ?? ''
   }
 
-  colorChanged() {
+  colorChanged () {
     this.$emit('colorChanged', this.color)
   }
 
@@ -104,7 +104,6 @@ export default class FavoriteColorCard extends Vue {
   dialog = false
 }
 </script>
-
 
 <style>
 
