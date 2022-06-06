@@ -14,10 +14,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^2.14.2"
+    "@byu-oit/nuxt-common": "^2.14.2",
+    "cors": "^2.8.5"
   },
   "//peerDependenciesComment": "The 'peerDependencies' section is only to help IDE autocompletion. It should only list a few necessary sub-dependencies from @byu-oit/nuxt-common",
-  " ": {
+  "peerDependencies": {
     "@nuxtjs/axios": "*",
     "@vue/test-utils": "*",
     "nuxt-property-decorator": "*",
