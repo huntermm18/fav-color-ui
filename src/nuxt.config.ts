@@ -63,7 +63,8 @@ export default {
 //Stops local CORS errors when target is set
     proxy: {
       '/api': {
-        target: 'https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/',
+        //target: 'https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu/',
+          target: 'https://api.byu.edu:443/echo/v2/echo',
         pathRewrite: {'^/api': '/'},
         changeOrigin: true,
           // headers: {
