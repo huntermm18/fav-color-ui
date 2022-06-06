@@ -3,8 +3,20 @@
     <byu-header>
       <span slot="site-title">
         Favorite Colors
-        <span v-if="isSandbox" class="sandbox-notification">DEV</span>
+        <!--span v-if="isSandbox" class="sandbox-notification">DEV</span-->
+        <a href="/">
+          <span class="sandbox-notification">
+            Home
+          </span>
+        </a>
+        <a href="/me">
+          <span class="sandbox-notification">
+           My Color
+          </span>
+        </a>
+
       </span>
+
       <byu-user-info v-if="authenticated" slot="user">
         <a slot="login" href="#">Sign In</a>
         <a slot="logout" href="#" @click.stop.prevent="logout">Sign Out</a>

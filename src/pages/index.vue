@@ -20,7 +20,7 @@
 
       <v-card class="card">
         <v-card-title class="text-h5 grey lighten-2">
-          Add a New Favorite Color Card
+          Add a New Favorite Color Card *Not saved to database - just for dev
         </v-card-title><br>
 
         <v-card-text>Enter your name</v-card-text>
@@ -64,10 +64,10 @@
     <ul v-for="(student, index) in students" :key="student.byuId">
       <v-row v-if="index == 0 || index % 2 == 0" no-gutters>
         <v-col>
-          <favorite-color-card :name="student.name" :net-id="student.byuId" :fav-color="student.favColor" />
+          <favorite-color-card :name="student.name" :byuId="student.byuId" :fav-color="student.fav_color" />
         </v-col>
         <v-col v-if="students[index+1]">
-          <favorite-color-card :name="students[index+1].name" :net-id="students[index+1].byuId" :fav-color="students[index+1].favColor" />
+          <favorite-color-card :name="students[index+1].name" :byuId="students[index+1].byuId" :fav-color="students[index+1].fav_color" />
         </v-col>
       </v-row>
     </ul>
@@ -105,15 +105,38 @@ export default class IndexPage extends Vue {
     const newStudent = {
       byuId: this.newByuId,
       name: this.newPersonName,
-      favColor: this.newFavColor
+      fav_color: this.newFavColor
     }
     console.log('in addColorCard()')
-    if (!newStudent.byuId || !newStudent.name || !newStudent.favColor) {
+    if (!newStudent.byuId || !newStudent.name || !newStudent.fav_color) {
       return
     }
     this.students.push(newStudent)
     this.numAdded++ // key to refresh the DOM
   }
+
+  async mounted() {
+    // run echo v2 api to get jwt
+    const responseJwt = await this.$axios.$get('/api'
+      , {
+        headers: {
+          Authorization: 'Bearer d7675cebedfb2e31d944b16c2a529855'
+        }
+      })
+    const jwt = responseJwt.headers['X-Jwt-Assertion'].at(0)
+
+    // call backend api for this website
+    const response = await this.$axios.$get(`https://mhm62-fav-color-dev.byu-oit-fullstack-trn.amazon.byu.edu`
+      , {
+        headers: {
+          'X-Jwt-Assertion': jwt
+        }
+      })
+    console.log(response)
+    this.students.push.apply(this.students, response)
+    console.log(this.students)
+  }
+
 }
 </script>
 

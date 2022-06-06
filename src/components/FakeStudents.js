@@ -1,58 +1,58 @@
 const fakeStudents = [
   {
     byuId: '1234',
-    name: 'cosmo',
-    favColor: 'blue'
+    name: '(fake) cosmo',
+    fav_color: 'blue'
   },
   {
     byuId: '8888',
-    name: 'second',
-    favColor: 'teal'
+    name: '(fake) second',
+    fav_color: 'teal'
   },
   {
     byuId: '333',
-    name: 'jack',
-    favColor: 'amber'
+    name: '(fake) jack',
+    fav_color: 'amber'
   },
   {
     byuId: '444',
-    name: 'carl',
-    favColor: 'grey'
+    name: '(fake) carl',
+    fav_color: 'brown'
   },
   {
-    byuId: '1234',
-    name: 'cosmo',
-    favColor: 'blue'
+    byuId: '12342',
+    name: '(fake) steve',
+    fav_color: 'purple'
   },
   {
-    byuId: '8888',
-    name: 'second',
-    favColor: 'teal'
+    byuId: '88882',
+    name: '(fake) billy',
+    fav_color: 'teal'
   },
   {
-    byuId: '333',
-    name: 'jack',
-    favColor: 'amber'
+    byuId: '3332',
+    name: '(fake) james',
+    fav_color: 'amber'
   },
   {
-    byuId: '444',
-    name: 'carl',
-    favColor: 'grey'
+    byuId: '4442',
+    name: '(fake) balloon',
+    fav_color: 'grey'
   },
   {
-    byuId: '1234',
-    name: 'cosmo',
-    favColor: 'blue'
+    byuId: '12343',
+    name: '(fake) banana',
+    fav_color: 'red'
   },
   {
-    byuId: '8888',
-    name: 'second',
-    favColor: 'teal'
+    byuId: '88883',
+    name: '(fake) tim',
+    fav_color: 'teal'
   },
   {
-    byuId: '333',
-    name: 'jack',
-    favColor: 'amber'
+    byuId: '3333',
+    name: '(fake) fred',
+    fav_color: 'amber'
   }
 
 ]
