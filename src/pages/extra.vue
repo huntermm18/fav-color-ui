@@ -54,7 +54,7 @@
 <!--  question = ''-->
 <!--  answer = ''-->
 
-<!--  clickQuestionButton() {-->
+<!--  async clickQuestionButton() {-->
 
 <!--    console.log('in click question button')-->
 <!--    let number = document.getElementById("number").value;-->
@@ -69,36 +69,9 @@
 <!--      console.log("http://jservice.io//api/category?id=" + number);-->
 <!--    }-->
 
-<!--    fetch(url)-->
-<!--      .then(function(response) {-->
-<!--        console.log(response);-->
-<!--        if (response.status != 200) {-->
-<!--          return {-->
-<!--            text: "Error calling the Numbers API service: " + response.statusText-->
-<!--          }-->
-<!--        }-->
-<!--        return response.json();-->
-<!--      })-->
-<!--      .then(function(json) {-->
-<!--        // update DOM with response-->
-
-<!--        if (json.clues) {-->
-<!--          let randNum = Math.floor(Math.random() * json.clues.length)-->
-<!--          this.question = json.clues[randNum].question;-->
-<!--          console.log(this.question)-->
-<!--          updateResultQuestion(questions);-->
-<!--          updateResultAnswer("Answer: " + json.clues[randNum].answer);-->
-<!--          document.getElementById('answerShown').textContent = "";-->
-<!--        }-->
-<!--        else {-->
-<!--          updateResultQuestion(json[0].question);-->
-<!--          updateResultAnswer("Answer: " + json[0].answer);-->
-<!--          document.getElementById('category').textContent = "Category: " + json[0].category.title;-->
-<!--          document.getElementById('answerShown').textContent = "";-->
-<!--          document.getElementById('idsaver').textContent = "Current category ID: " + json[0].category.id;-->
-<!--        }-->
-
-<!--      });-->
+<!--    let response = await fetch(url)-->
+<!--    console.log('response.json: ', response.json)-->
+<!--    this.question = response.json.question-->
 <!--  }-->
 
 <!--}-->
