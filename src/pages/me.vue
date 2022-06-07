@@ -1,56 +1,65 @@
 <template :key="favColor">
-  <FavoriteColorCard
-    v-if="favColor"
-    :key="favColor"
-    :name="$store.state.user.name.givenName"
-    :fav-color="favColor"
-    :byu-id="$store.state.user.byuId"
-  />
-  <v-dialog
-    v-else
-    v-model="dialog"
-    width="1000"
-  >
-    <template #activator="{ on, attrs }">
-      <v-btn
-        class="edit-button"
-        color="blue lighten-2"
-        dark
-        v-bind="attrs"
-        width="200"
-        v-on="on"
-      >
-        Set Color
-      </v-btn>
-    </template>
+  <div v-if="favColor">
+    <FavoriteColorCard
+      :key="favColor"
+      :name="$store.state.user.name.givenName"
+      :fav-color="favColor"
+      :byu-id="$store.state.user.byuId"
+    />
+  </div>
 
-    <v-card class="card">
-      <v-card-title class="text-h5 grey lighten-2">
-        Set Color
-      </v-card-title><br>
-
-      <v-card-text>Select a color</v-card-text>
-      <v-select
-        v-model="newFavColor"
-        :items="colors"
-        label="Colors"
-        outlined
-      />
-
-      <v-divider />
-
-      <v-card-actions>
-        <v-spacer />
-
-        <v-btn color="primary" text @click="dialog = false">
-          Cancel
+  <div v-else>
+    <v-dialog
+      v-model="dialog"
+      width="1000"
+    >
+      <template #activator="{ on, attrs }">
+        <v-btn
+          class="edit-button"
+          color="blue lighten-2"
+          dark
+          v-bind="attrs"
+          width="200"
+          v-on="on"
+        >
+          Set Color
         </v-btn>
-        <v-btn color="primary" text @click="addFavoriteColor(); dialog = false">
-          Save
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+      </template>
+
+      <v-card class="card">
+        <v-card-title class="text-h5 grey lighten-2">
+          Set Color
+        </v-card-title><br>
+
+        <v-card-text>Select a color</v-card-text>
+        <v-select
+          v-model="newFavColor"
+          :items="colors"
+          label="Colors"
+          outlined
+        />
+
+        <v-divider />
+
+        <v-card-actions>
+          <v-spacer />
+
+          <v-btn color="primary" text @click="dialog = false">
+            Cancel
+          </v-btn>
+          <v-btn color="primary" text @click="addFavoriteColor(); dialog = false">
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <div class="missingColorBox">
+      <h1>It looks like you haven't set a favorite color yet</h1>
+      <img src="https://i.pinimg.com/564x/31/ae/cf/31aecf64a591fe45a108ef8330430b1b--food-inspiration-random-stuff.jpg"/>
+    </div>
+
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -104,3 +113,11 @@ export default class Me extends Vue {
 }
 
 </script>
+
+<style>
+.missingColorBox {
+  object-fit: scale-down;
+  margin-top: 70pt;
+  text-align: center;
+}
+</style>
