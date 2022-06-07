@@ -56,35 +56,41 @@ export default class extra extends Vue {
   async clickQuestionButton () {
     console.log('in click question button')
     let number = this.$refs.number.value
+    this.answer = ''
     this.$refs.category.textContent = ''
     this.$refs.answer.textContent = ''
 
     let url = ''
     if (number === '') {
       number = '1'
-      url = 'http://jservice.io/api/random/?' + number + '?json'
+      url = 'https://jservice.io/api/random/?' + number + '?json'
     } else {
-      url = 'http://jservice.io//api/category?id=' + number
-      console.log('http://jservice.io//api/category?id=' + number)
+      url = 'https://jservice.io//api/category?id=' + number
+      console.log('https://jservice.io//api/category?id=' + number)
     }
 
-    let response = await fetch(url)
-    response = await response.json()
-    console.log('response.json: ', response)
+    try {
+      let response = await fetch(url)
+      response = await response.json()
+      console.log('response.json: ', response)
 
-    if (response.clues) {
-      const randNum = Math.floor(Math.random() * response.clues.length)
-      this.question = response.clues[randNum].question
-      this.answer = response.clues[randNum].answer
-      this.$refs.category.textContent = 'Category ID: ' + response.clues[randNum].category_id
-    } else {
-      this.question = response[0].question
-      this.answer = response[0].answer
-      this.$refs.category.textContent = response[0].category.id + ': ' + response[0].category.title
+      if (response.clues) {
+        const randNum = Math.floor(Math.random() * response.clues.length)
+        this.question = response.clues[randNum].question
+        this.answer = response.clues[randNum].answer
+        this.$refs.category.textContent = 'Category ID: ' + response.clues[randNum].category_id
+      } else {
+        this.question = response[0].question
+        this.answer = response[0].answer
+        this.$refs.category.textContent = response[0].category.id + ': ' + response[0].category.title
+      }
+
+      this.$refs.question.textContent = this.question
+      console.log('question: ', this.question)
+    } catch (e) {
+      this.$refs.question.textContent = 'No questions found'
     }
 
-    this.$refs.question.textContent = this.question
-    console.log('question: ', this.question)
   }
 
   clickAnswerButton () {
