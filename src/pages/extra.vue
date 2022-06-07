@@ -2,7 +2,7 @@
   <div>
     <form>
       Enter an ID number for your desired category, or leave blank for random<br>
-      <input id="number" placeholder="Category ID">
+      <input ref="number" placeholder="Category ID">
       <button @click.prevent="clickQuestionButton()">
         Get Question
       </button>
@@ -10,7 +10,7 @@
 
     <div class="second-box">
       <br>
-      <h3 id="category" />
+      <h3 ref="category" />
       <p id="question" ref="question" /><br>
 
       <button @click.prevent="clickAnswerButton()">
@@ -55,7 +55,7 @@ export default class extra extends Vue {
 
   async clickQuestionButton () {
     console.log('in click question button')
-    let number = document.getElementById('number').value
+    let number = this.$refs.number.value
 
     let url = ''
     if (number === '') {
@@ -69,9 +69,17 @@ export default class extra extends Vue {
     let response = await fetch(url)
     response = await response.json()
     console.log('response.json: ', response)
+
+    if (response.clues) {
+      const randNum = Math.floor(Math.random() * json.clues.length)
+      this.question = response.clues[randNum].question
+      this.answer = response.clues[randNum].answer
+    }
+
     this.question = response[0].question
     this.answer = response[0].answer
     this.$refs.question.textContent = this.question
+    this.$refs.category.textContent = response[0].category.id + ': ' + response[0].category.title
     console.log('question: ', this.question)
   }
 
