@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <form>
       Enter an ID number for your desired category, or leave blank for random<br>
       <input ref="number" placeholder="Category ID">
@@ -56,6 +56,8 @@ export default class extra extends Vue {
   async clickQuestionButton () {
     console.log('in click question button')
     let number = this.$refs.number.value
+    this.$refs.category.textContent = ''
+    this.$refs.answer.textContent = ''
 
     let url = ''
     if (number === '') {
@@ -71,15 +73,17 @@ export default class extra extends Vue {
     console.log('response.json: ', response)
 
     if (response.clues) {
-      const randNum = Math.floor(Math.random() * json.clues.length)
+      const randNum = Math.floor(Math.random() * response.clues.length)
       this.question = response.clues[randNum].question
       this.answer = response.clues[randNum].answer
+      this.$refs.category.textContent = 'Category ID: ' + response.clues[randNum].category_id
+    } else {
+      this.question = response[0].question
+      this.answer = response[0].answer
+      this.$refs.category.textContent = response[0].category.id + ': ' + response[0].category.title
     }
 
-    this.question = response[0].question
-    this.answer = response[0].answer
     this.$refs.question.textContent = this.question
-    this.$refs.category.textContent = response[0].category.id + ': ' + response[0].category.title
     console.log('question: ', this.question)
   }
 
@@ -109,6 +113,10 @@ button {
 input {
   margin: 14px;
   outline-style: auto;
+}
+
+.container {
+  margin-top: 25px;
 }
 
 </style>
