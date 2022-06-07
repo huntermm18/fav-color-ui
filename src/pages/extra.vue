@@ -12,8 +12,6 @@
 <!--      <p id="question" v-model="question" :key="question"></p>-->
 <!--      <p id="answer" v-model="answer"></p>-->
 
-
-
 <!--      <br>-->
 <!--      <button id="answerButton" class="pure-button pure-button-primary">Get Answer</button>-->
 <!--      <p id="answerShown"></p>-->
@@ -43,7 +41,6 @@
 <!--    </div>-->
 
 <!--  </div>-->
-
 
 <!--</template>-->
 
@@ -101,10 +98,8 @@
 <!--          document.getElementById('idsaver').textContent = "Current category ID: " + json[0].category.id;-->
 <!--        }-->
 
-
 <!--      });-->
 <!--  }-->
-
 
 <!--}-->
 <!--</script>-->

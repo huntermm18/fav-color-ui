@@ -55,11 +55,9 @@
     </v-dialog>
     <div class="missingColorBox">
       <h1>It looks like you haven't set a favorite color yet</h1>
-      <img src="https://i.pinimg.com/564x/31/ae/cf/31aecf64a591fe45a108ef8330430b1b--food-inspiration-random-stuff.jpg"/>
+      <img src="https://i.pinimg.com/564x/31/ae/cf/31aecf64a591fe45a108ef8330430b1b--food-inspiration-random-stuff.jpg">
     </div>
-
   </div>
-
 </template>
 
 <script lang="ts">
