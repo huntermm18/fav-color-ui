@@ -1,84 +1,106 @@
-<!--<template>-->
-<!--  <div>-->
-<!--    <form>-->
-<!--      Enter an ID number for your desired category, or leave blank for random<br>-->
-<!--      <input placeholder="Category ID" id="number">-->
-<!--      <button @click.prevent="clickQuestionButton()">Get Question</button>-->
-<!--    </form>-->
+<template>
+  <div>
+    <form>
+      Enter an ID number for your desired category, or leave blank for random<br>
+      <input id="number" placeholder="Category ID">
+      <button @click.prevent="clickQuestionButton()">
+        Get Question
+      </button>
+    </form>
 
-<!--    <div class="second-box">-->
-<!--      <br>-->
-<!--      <h3 id="category"></h3>-->
-<!--      <p id="question" v-model="question" :key="question"></p>-->
-<!--      <p id="answer" v-model="answer"></p>-->
+    <div class="second-box">
+      <br>
+      <h3 id="category" />
+      <p id="question" ref="question" /><br>
 
-<!--      <br>-->
-<!--      <button id="answerButton" class="pure-button pure-button-primary">Get Answer</button>-->
-<!--      <p id="answerShown"></p>-->
-<!--      <p id="answer"></p>-->
-<!--    </div>-->
+      <button @click.prevent="clickAnswerButton()">
+        Get Answer
+      </button><br><br>
+      <p ref="answer" />
+    </div><br><br>
 
-<!--    <div class="third-box">-->
-<!--      <h1 id="idsaver"></h1>-->
-<!--      <h2>Some category ID numbers:</h2>-->
-<!--      <ul>-->
-<!--        <li>Movies: 4</li>-->
-<!--        <li>Magazines: 752</li>-->
-<!--        <li>Stupid Answers: 136</li>-->
-<!--        <li>Old Testiment Books: 7969</li>-->
-<!--        <li>dictators & tyrants: 9238</li>-->
-<!--        <li>economics: 761</li>-->
-<!--        <li>you should know this: 17770</li>-->
-<!--        <li>1960s broadway: 1329</li>-->
-<!--        <li>antonyms: 1564</li>-->
-<!--        <li>movies by cast: 16271</li>-->
-<!--        <li>inventors: 1498</li>-->
-<!--        <li>5-letter words: 139</li>-->
-<!--        <li>chocolate: 212</li>-->
-<!--        <li>familiar tv faces: 4769</li>-->
-<!--        <li>spaced out: 5256</li>-->
-<!--      </ul>-->
-<!--    </div>-->
+    <div class="third-box">
+      <h1 id="idsaver" />
+      <h2>Some category ID numbers:</h2>
+      <ul>
+        <li>Movies: 4</li>
+        <li>Magazines: 752</li>
+        <li>Stupid Answers: 136</li>
+        <li>Old Testiment Books: 7969</li>
+        <li>dictators & tyrants: 9238</li>
+        <li>economics: 761</li>
+        <li>you should know this: 17770</li>
+        <li>1960s broadway: 1329</li>
+        <li>antonyms: 1564</li>
+        <li>movies by cast: 16271</li>
+        <li>inventors: 1498</li>
+        <li>5-letter words: 139</li>
+        <li>chocolate: 212</li>
+        <li>familiar tv faces: 4769</li>
+        <li>spaced out: 5256</li>
+      </ul>
+    </div>
+  </div>
+</template>
 
-<!--  </div>-->
+<script>
 
-<!--</template>-->
+import { Vue } from 'nuxt-property-decorator'
 
-<!--<script>-->
+export default class extra extends Vue {
+  // question = 'question goes here'
+  answer = ''
+  question = ''
+  update = 0
 
-<!--import {Vue} from "nuxt-property-decorator";-->
+  async clickQuestionButton () {
+    console.log('in click question button')
+    let number = document.getElementById('number').value
 
-<!--//document.getElementById('getQuestion').addEventListener('click', clickQuestionButton);-->
+    let url = ''
+    if (number === '') {
+      number = '1'
+      url = 'http://jservice.io/api/random/?' + number + '?json'
+    } else {
+      url = 'http://jservice.io//api/category?id=' + number
+      console.log('http://jservice.io//api/category?id=' + number)
+    }
 
-<!--export default class extra extends Vue {-->
-<!--  question = ''-->
-<!--  answer = ''-->
+    let response = await fetch(url)
+    response = await response.json()
+    console.log('response.json: ', response)
+    this.question = response[0].question
+    this.answer = response[0].answer
+    this.$refs.question.textContent = this.question
+    console.log('question: ', this.question)
+  }
 
-<!--  async clickQuestionButton() {-->
+  clickAnswerButton () {
+    this.$refs.answer.textContent = this.answer
+  }
+}
+</script>
 
-<!--    console.log('in click question button')-->
-<!--    let number = document.getElementById("number").value;-->
+<style scoped>
+* {
+  text-align: center;
+  list-style: none;
+}
 
-<!--    let url = "";-->
-<!--    if (number === "") {-->
-<!--      number = "1";-->
-<!--      url = "http://jservice.io/api/random/?" + number + "?json";-->
-<!--    }-->
-<!--    else {-->
-<!--      url = "http://jservice.io//api/category?id=" + number;-->
-<!--      console.log("http://jservice.io//api/category?id=" + number);-->
-<!--    }-->
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 
-<!--    let response = await fetch(url)-->
-<!--    console.log('response.json: ', response.json)-->
-<!--    this.question = response.json.question-->
-<!--  }-->
+input {
+  margin: 14px;
+  outline-style: auto;
+}
 
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--* {-->
-<!--  text-align: center;-->
-<!--}-->
-<!--</style>-->
+</style>
