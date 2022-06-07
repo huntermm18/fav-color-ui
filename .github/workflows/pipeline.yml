@@ -34,9 +34,9 @@ jobs:
           echo "std_change_key=${{ secrets.standard_change_sandbox_client_key }}" >> $GITHUB_ENV
           echo "std_change_secret=${{ secrets.standard_change_sandbox_client_secret }}" >> $GITHUB_ENV
           echo "tf_working_dir=./terraform/dev/app" >> $GITHUB_ENV
-          echo "client_id_param=/mhm62-fav-color-ui-dev/oauth_client_id" >> $GITHUB_ENV
-          echo "callback_url_param=/mhm62-fav-color-ui-dev/callback_url" >> $GITHUB_ENV
-          echo "app_dynamics_key_param=/mhm62-fav-color-ui-dev/app_dynamics_key" >> $GITHUB_ENV
+          echo "client_id_param=/mhm62-fav-color-ui/oauth_client_id" >> $GITHUB_ENV
+          echo "callback_url_param=/mhm62-fav-color-ui/callback_url" >> $GITHUB_ENV
+          echo "app_dynamics_key_param=/mhm62-fav-color-ui/app_dynamics_key" >> $GITHUB_ENV
            echo "template_id=Codepipeline-Standard-Change" >> $GITHUB_ENV
 
       - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>, <STD_CHANGE_TEMPLATE_ID>
